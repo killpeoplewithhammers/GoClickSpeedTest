@@ -26,13 +26,16 @@ func main() {
 		if len(clickSlice) > 0 {
 			for i := 0; i <= len(clickSlice); i++ {
 				if now.Sub(clickSlice[0]) > 1000000000 {
-					slices.Delete(clickSlice, 0, 1)
+					clickSlice = slices.Delete(clickSlice, 0, 1)
 				}
 			} // */
 		}
 		rl.ClearBackground(rl.RayWhite)
+		textSize := rl.MeasureText(strconv.Itoa(len(clickSlice))+" clicks per second", 20)
 
-		rl.DrawText(strconv.Itoa(len(clickSlice))+" clicks per second", 300, 200, 20, rl.Black)
+		textPositionX := 400 - textSize/2
+
+		rl.DrawText(strconv.Itoa(len(clickSlice))+" clicks per second", textPositionX, 200, 20, rl.Black)
 
 		rl.EndDrawing()
 	}
