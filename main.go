@@ -1,34 +1,40 @@
 package main
 
-import rl "github.com/gen2brain/raylib-go/raylib"
+import (
+	"fmt"
+	"strconv"
+	"time"
+
+	rl "github.com/gen2brain/raylib-go/raylib"
+	"golang.org/x/exp/slices"
+)
 
 func main() {
-	rl.InitWindow(800, 450, "BOUNCY TEXT")
+	rl.InitWindow(800, 450, "Click Test")
+	startTime := time.Now()
+	fmt.Println(startTime)
 
-	rl.SetTargetFPS(120)
-
-	titleHeight := int32(200)
-	up := false
+	var clickSlice []time.Time
 
 	for !rl.WindowShouldClose() {
-
+		currentTime := time.Now()
 		rl.BeginDrawing()
-
+		if rl.IsMouseButtonPressed(0) {
+			clickSlice = append(clickSlice, currentTime)
+		}
+		if len(clickSlice) == 0 {
+			for i := 0; i <= len(clickSlice); i++ {
+				now := time.Now()
+				if now.Sub(clickSlice[0]) > 1000000000 {
+					slices.Delete(clickSlice, 0, 1)
+				} else {
+					break
+				}
+			} // */
+		}
 		rl.ClearBackground(rl.RayWhite)
 
-		if up {
-			titleHeight += 5
-		}
-		if !up {
-			titleHeight -= 5
-		}
-		if titleHeight > 300 {
-			up = false
-		} else if titleHeight < 100 {
-			up = true
-		}
-
-		rl.DrawText("this should go up and down", 240, int32(titleHeight), 20, rl.Black)
+		rl.DrawText(strconv.Itoa(len(clickSlice))+" clicks per second", 300, 200, 20, rl.Black)
 
 		rl.EndDrawing()
 	}
