@@ -22,13 +22,11 @@ func main() {
 		if rl.IsMouseButtonPressed(0) {
 			clickSlice = append(clickSlice, currentTime)
 		}
-		if len(clickSlice) == 0 {
+		now := time.Now()
+		if len(clickSlice) > 0 {
 			for i := 0; i <= len(clickSlice); i++ {
-				now := time.Now()
 				if now.Sub(clickSlice[0]) > 1000000000 {
 					slices.Delete(clickSlice, 0, 1)
-				} else {
-					break
 				}
 			} // */
 		}
