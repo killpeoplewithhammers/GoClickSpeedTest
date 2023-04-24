@@ -11,10 +11,8 @@ import (
 func main() {
 	rl.SetConfigFlags(rl.FlagWindowResizable)
 	rl.InitWindow(800, 450, "Click Test")
-	var click string
 	var clickSlice []time.Time
 	var rightClickSlice []time.Time
-	click = " clicks "
 	for !rl.WindowShouldClose() {
 		currentTime := time.Now()
 		rl.BeginDrawing()
@@ -46,11 +44,11 @@ func main() {
 			} // */
 		rl.ClearBackground(rl.RayWhite)
 		fontSize := int32(rl.GetRenderWidth() / 40)
-		textWidth := rl.MeasureText(strconv.Itoa(len(clickSlice))+" | "+strconv.Itoa(len(rightClickSlice))+click+"per second", fontSize)
+		textWidth := rl.MeasureText(strconv.Itoa(len(clickSlice))+" | "+strconv.Itoa(len(rightClickSlice))+" clicks per second", fontSize)
 		textPositionX := int32(rl.GetRenderWidth()/2 - int(textWidth)/2)
 
 		textPositionY := int32(rl.GetRenderHeight())/2 - fontSize/2
-		rl.DrawText(strconv.Itoa(len(clickSlice))+" | "+strconv.Itoa(len(rightClickSlice))+click+"per second", textPositionX, textPositionY, fontSize, rl.Black)
+		rl.DrawText(strconv.Itoa(len(clickSlice))+" | "+strconv.Itoa(len(rightClickSlice))+" clicks per second", textPositionX, textPositionY, fontSize, rl.Black)
 
 		rl.EndDrawing()
 	}
