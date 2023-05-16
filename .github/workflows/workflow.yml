@@ -8,6 +8,7 @@ on:
     branches: [ $default-branch ]
   pull_request:
     branches: [ $default-branch ]
+  workflow_dispatch
 
 jobs:
 
@@ -20,15 +21,15 @@ jobs:
       uses: actions/setup-go@v3
       with:
         go-version: 1.19
-      
+
     - name: Install deps
       run: |
           go get github.com/gen2brain/raylib-go/raylib
           go get golang.org/x/exp/slices
-          
+
     - name: Build
       run: go build -o clickspeedtest
-    
+
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       path: clickspeedtest
