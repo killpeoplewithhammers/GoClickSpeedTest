@@ -27,8 +27,9 @@ jobs:
           go get golang.org/x/exp/slices
 
     - name: Build
-      run: go build -o clickspeedtest
-
+      run: |
+        go build -v -o clickspeedtest
+        go test -v
+        
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
-      path: clickspeedtest
