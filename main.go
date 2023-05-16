@@ -11,8 +11,10 @@ import (
 func main() {
 	rl.SetConfigFlags(rl.FlagWindowResizable)
 	rl.InitWindow(800, 450, "Click Test")
+	// create slices to store the times of each click
 	var clickSlice []time.Time
 	var rightClickSlice []time.Time
+	// start window
 	for !rl.WindowShouldClose() {
 		currentTime := time.Now()
 		rl.BeginDrawing()
