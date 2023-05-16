@@ -29,11 +29,11 @@ jobs:
 
     - name: Build
       run: |
-        go build -v -o clickspeedtest
+        go build -v -o clickspeedtest.exe
         go test -v
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: clickspeedtest-windows
+        name: clickspeedtest-windows.exe
         path: ./clickspeedtest
